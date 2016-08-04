@@ -1,0 +1,28 @@
+_repo: Nomads-of-the-North--A-Story-of-Romance-and-Adventure-under-the-Open-Stars_4704
+_version: 0.0.1
+creator:
+  author:
+    agent_name: Curwood, James Oliver
+    birthdate: 1878
+    deathdate: 1927
+    gutenberg_agent_id: '1487'
+    url: http://www.gutenberg.org/2009/agents/1487
+    wikipedia: http://en.wikipedia.org/wiki/James_Oliver_Curwood
+description: ''
+gutenberg_issued: '2003-12-01'
+gutenberg_type: Text
+identifiers:
+  gutenberg: '4704'
+language: en
+publisher: Project Gutenberg
+rights: Public domain in the USA.
+rights_url: http://creativecommons.org/about/pdm
+subjects:
+- !lcsh 'Friendship -- Fiction'
+- !lcsh 'Dogs -- Fiction'
+- !lcsh 'Bears -- Fiction'
+- !lcsh 'Adventure stories'
+- !lcc 'PS'
+- GITenberg
+title: 'Nomads of the North: A Story of Romance and Adventure under the Open Stars'
+url: http://www.gutenberg.org/ebooks/4704
