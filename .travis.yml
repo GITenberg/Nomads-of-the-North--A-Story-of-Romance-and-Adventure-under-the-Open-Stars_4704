@@ -1,0 +1,61 @@
+sudo: required
+dist: trusty
+language: ruby
+
+before_install:
+before_install:
+- gem install asciidoctor -v 1.5.2
+- gem install tilt
+- sudo pip install git+https://github.com/gitenberg-dev/gitberg
+- sudo pip install pillow
+- sudo pip install cssutils
+- sudo pip install docutils
+- sudo pip install roman
+- sudo pip install git+https://github.com/gitenberg-dev/pg-epubmaker
+script:
+- VERSION=`ruby -e "require 'yaml'; meta = YAML.load_file('metadata.yaml'); puts meta['_version'];"`
+- git clone https://github.com/gitenberg-dev/asciidoctor-htmlbook.git
+- sudo pip install -r asciidoctor-htmlbook/gitberg-machine/requirements.txt
+
+- /usr/bin/python -c "from gitenberg import travis; travis.build_epub()"
+- ebook-convert book.epub book.mobi
+- xvfb-run ebook-convert book.epub book.pdf
+branches:
+  only:
+  - master
+notifications:
+  webhooks:
+    urls:
+      - https://unglue.it/api/travisci/webhook
+    on_success: always
+    on_failure: never
+    on_start: never
+deploy:
+  skip_cleanup: true
+  provider: releases
+  api_key:
+    secure: kuz5+0Z3kgS3pOPcvbPeDns52PVrm+I+xTM9idb8v1QzZu6u5yXOgccNuu7bB8BvJxUlQXiBZoQg20YXRu2aeD3jPihArg8TnkIvvBeNisToZMS7KKp+jlIXWbhGC0hFacw7f2GNf7ZMCGJhw02re4VXuqXmjoxKfSX5wV9DtKACMp8XQEGGVeiyF5mRfPKHMqCLs4yffWhEklnMbpXrog83jeVzPS/O0nWz+Es6+7x+WxQt//sngxW7s6HT8+fM5wjPznxynWhhUEaLdkJg0y8uF2+lQUamn/ge/zvjIFBVs2utpclXiAWxxKQqPbn9EpeoEqrn6VCxe8HBuApwm0GOBSHdD/dWskGMR373hS7rOZ/cuSuraBnBa0kSiv6+T75y0p5LgKljnHh793MogCPYaIUN2Ioa/cUXmvPks876YqbwDjVl8L6DojUWJzBvFHK+v3Ni7/OADWZtARs76arHIQgwxpgo2yMyqlKqzlCD48fuxO1dhi++mTMsJVhYBtAGx3vh53C78f9GxFe4nRr4W7uXXM4ETqNYxwDEy2GVchw4fKj1iTeCajHkTzU3fZBJsxHR+vT04VBRMz+bdiNRvM+Z3LCaQJJuYO60pS7v7DXST59hgvjooBK1Q3T7q7ws6fOuqKqiu9KzWCAYeEshp0dX+poKitx74/hynNI=
+  file:
+    - book.epub
+    - book.mobi
+    - book.pdf
+  "on":
+    repo: GITenberg/Nomads-of-the-North--A-Story-of-Romance-and-Adventure-under-the-Open-Stars_4704
+addons:
+  apt:
+    packages:
+    - xsltproc
+    - xvfb
+    - calibre
+    - python-pip
+    - git
+    - python-dev
+    - libjpeg-dev
+    - libpng-dev
+    - libfreetype6
+    - libfreetype6-dev
+    - zlib1g-dev
+    - python-lxml
+    - libxml2-dev
+    - libxslt1-dev
+    - tidy
